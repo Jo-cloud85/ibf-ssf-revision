@@ -32,20 +32,15 @@ public class LoginController {
         @ModelAttribute @Valid Login login,
         BindingResult result) {
 
-        String username = login.getUsername();
-        String gender = login.getGender();
-        String phoneNo = login.getPhoneNo();
         Date loginDate = new Date();
+        login.setLoginDate(loginDate);
 
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
             return "login";
         }
 
-        session.setAttribute("username", username);
-        session.setAttribute("gender", gender);
-        session.setAttribute("phoneNo", phoneNo);
-        session.setAttribute("loginDate", loginDate);
+        session.setAttribute("login", login);
 
         return "redirect:/product";
     }
